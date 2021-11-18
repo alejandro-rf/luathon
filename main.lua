@@ -21,3 +21,11 @@ function love.draw()
     v:draw()
   end
 end
+
+--[[
+for _,v in ipairs(actorList) do
+  if v:is(Bullet) and v.delete then
+    table.remove(actorList, _)
+  end
+end
+--]]
