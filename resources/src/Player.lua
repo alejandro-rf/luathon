@@ -4,7 +4,7 @@ local Vector = Vector or require"resources/lib/vector"
 local Data = Data or require "data"
 
 function Player:new(x,y)
-  Player.super.new(self,data.PLAYER_TEXTURE,400,300,50,0,0)
+  Player.super.new(self,Data.PLAYER_TEXTURE,400,300,50,0,0)
 end
 
 function Player:update(dt)
@@ -39,7 +39,7 @@ end
 
 function Player:handleMovement(dt)
   if love.keyboard.isDown("d") then
-    self.position.x = math.min(data.SCREEN_WIDTH - self.width / 2, self.position.x + self.speed * dt)
+    self.position.x = math.min(Data.SCREEN_WIDTH - self.width / 2, self.position.x + self.speed * dt)
   elseif love.keyboard.isDown("a") then
     self.position.x = math.max(self.width / 2, self.position.x - self.speed * dt)
   end
