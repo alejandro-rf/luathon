@@ -3,7 +3,7 @@ Player = Actor:extend()
 local Vector = Vector or require"resources/lib/vector"
 
 function Player:new(x,y)
-  Player.super.new(self,"Textures/playerPlayer1_blue.png",400,300,50,1,0)
+  Player.super.new(self,"resources/textures/playerShip1_blue.png",400,300,50,1,0)
 end
 
 function Player:update(dt)
