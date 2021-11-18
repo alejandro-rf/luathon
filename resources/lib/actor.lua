@@ -1,5 +1,5 @@
-Vector = Vector or require "lib/vector"
-Object = Object or require "lib/object"
+Vector = Vector or require "resources/lib/vector"
+Object = Object or require "resources/lib/object"
 local Actor = Object:extend()
 
 function Actor:new(image,x,y,speed,fx,fy)
