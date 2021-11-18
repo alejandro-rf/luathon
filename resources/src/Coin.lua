@@ -10,7 +10,7 @@ function Coin:new(x,y)
   local randomSpawnPosY = love.math.random(800, 900)
   self.delete = false
   
-  Coin.super.new(self,"resources/textures/coin.png",randomSpawnPosX, randomSpawnPosY, 250, 0 , -1)
+  Coin.super.new(self,Data.COIN_TEXTURE,randomSpawnPosX, randomSpawnPosY, 250, 0 , -1)
 end
 
 function Coin:update(dt)

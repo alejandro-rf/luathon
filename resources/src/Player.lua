@@ -4,7 +4,7 @@ local Vector = Vector or require"resources/lib/vector"
 local Data = Data or require "data"
 
 function Player:new(x,y)
-  Player.super.new(self,Data.PLAYER_TEXTURE,400,300,50,0,0)
+  Player.super.new(self,Data.PLAYER_TEXTURE,400,300,250,0,0)
 end
 
 function Player:update(dt)
