@@ -1,18 +1,15 @@
-Actor = Actor or require "Scripts/actor"
+Actor = Actor or require "resources/lib/actor"
 local Coin = Actor:extend()
 
-local rSpeed = 0.5
+local rotationSpeed = 0.5
 
 function Coin:new(x,y)
-  --Generate random attributes
+  --Generate random spawn position
   local randomImage = love.math.random(1, 4)
-  local randomSpawnPosX = love.math.random(0, 800)
-  local randomSpawnPosY = love.math.random(0, 600)
-  local randomForwardX = love.math.random(-1, 1)
-  local randomForwardY = love.math.random(-1, 1)
-  local randomSpeed = love.math.random(30, 50)
+  local randomSpawnPosX = love.math.random(0, 1280)
+  local randomSpawnPosY = love.math.random(800, 900)
   
-  Coin.super.new(self,"Textures/Meteors/meteorBrown_big"..tostring(randomImage)..".png",randomSpawnPosX, randomSpawnPosY, randomSpeed, randomForwardX ,randomForwardY)
+  Coin.super.new(self,"resources/textures/coin.png",randomSpawnPosX, randomSpawnPosY, 50, 0 , -1)
 end
 
 function Coin:update(dt)
@@ -20,7 +17,7 @@ function Coin:update(dt)
     --Check for borders
     self:borderCollision()
     --Rotation
-    self.rot = self.rot + rSpeed * dt
+    self.rot = self.rot + rotationSpeed * dt
 end
 
 function Coin:draw()
@@ -35,7 +32,8 @@ function Coin:draw()
 end
 
 function Coin:borderCollision()
-  if self.position.x < 0 - self.width or self.position.x > 800 + self.width or self.position.y < 0 - self.height or self.position.y > 600 + self.height then
+  if self.position.y < 0 - self.height then
+    --store pos?
     self:resetPos()
   end
 end

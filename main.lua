@@ -1,10 +1,13 @@
 Player = Player or require "resources/src/player"
+Coin = Coin or require "resources/src/coin"
 
 actorList = {}  --Lista de elementos de juego
 
 function love.load()
   local p = Player()
   table.insert(actorList,p)
+  local c = Coin()
+  table.insert(actorList,c)
 end
 
 function love.update(dt)
