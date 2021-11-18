@@ -12,7 +12,7 @@ end
 
 function love.update(dt)
   for _,v in ipairs(actorList) do
-    if CheckIfDead(v) then
+    if checkIfDead(v) then
       table.remove(actorList, _)
     end
     v:update(dt)
@@ -25,7 +25,7 @@ function love.draw()
   end
 end
 
-function CheckIfDead(object)
+function checkIfDead(object)
   if object:is(Coin) and object.delete then
     return true
   end
