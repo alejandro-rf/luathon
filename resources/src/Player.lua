@@ -3,7 +3,7 @@ Player = Actor:extend()
 local Vector = Vector or require"resources/lib/vector"
 
 function Player:new(x,y)
-  Player.super.new(self,"resources/textures/playerShip1_blue.png",400,300,50,1,0)
+  Player.super.new(self,"resources/textures/playerShip1_blue.png",400,300,50,0,0)
 end
 
 function Player:update(dt)
@@ -23,25 +23,13 @@ function Player:draw()
 end
 
 function Player:handleInput(dt)
-  --Forward
-  if love.keyboard.isDown("w") then
-    self.speed = self.speed + 50 * dt
-  end
-  --Backward
-  if love.keyboard.isDown("s") then
-    self.speed = self.speed - 50 * dt
-  end
-  --Turn left
+  --Go left
   if love.keyboard.isDown("a") then
-    self.forward:rotate(-2.5 * dt)
-    --self.forward:normalize()
-    self.rot = self.forward:ang()
+    self.forward.x = -1
   end
-  --Turn right
+  --Go right
   if love.keyboard.isDown("d") then
-    self.forward:rotate(2.5 * dt)
-    --self.forward:normalize()
-    self.rot = self.forward:ang()
+    self.forward.x = 1
   end
   
 end
