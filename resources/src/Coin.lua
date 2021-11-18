@@ -6,7 +6,7 @@ local rotationSpeed = 0.5
 function Coin:new(x,y)
   --Generate random spawn position
   local randomImage = love.math.random(1, 4)
-  local randomSpawnPosX = love.math.random(0, 1280)
+  local randomSpawnPosX = love.math.random(150, 1280 - 120)
   local randomSpawnPosY = love.math.random(800, 900)
   self.delete = false
   
