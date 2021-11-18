@@ -1,14 +1,17 @@
 Player = Player or require "resources/src/player"
 Coin = Coin or require "resources/src/coin"
 Timer = Timer or require "resources/lib/timer"
+Ground = Ground or require "resources/src/Ground"
 Data = Data or require "data"
 
 actorList = {}  --Lista de elementos de juego
 
 function love.load()
   local p = Player()
+  local g = Ground()
   table.insert(actorList,p)
   table.insert(actorList, Timer(2, function() local coin = Coin(); table.insert(actorList, coin) end, true))
+  table.insert(actorList, g)
 end
 
 function love.update(dt)
