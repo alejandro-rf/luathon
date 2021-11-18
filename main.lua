@@ -1,6 +1,7 @@
 Player = Player or require "resources/src/player"
 Coin = Coin or require "resources/src/coin"
 Timer = Timer or require "resources/lib/timer"
+Data = Data or require "data"
 
 actorList = {}  --Lista de elementos de juego
 
