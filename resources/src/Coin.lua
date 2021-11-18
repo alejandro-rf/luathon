@@ -8,6 +8,7 @@ function Coin:new(x,y)
   local randomImage = love.math.random(1, 4)
   local randomSpawnPosX = love.math.random(0, 1280)
   local randomSpawnPosY = love.math.random(800, 900)
+  self.delete = false
   
   Coin.super.new(self,"resources/textures/coin.png",randomSpawnPosX, randomSpawnPosY, 50, 0 , -1)
 end
@@ -34,7 +35,7 @@ end
 function Coin:borderCollision()
   if self.position.y < 0 - self.height then
     --store pos?
-    self:resetPos()
+    self.delete = true
   end
 end
 
