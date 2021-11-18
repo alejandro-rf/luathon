@@ -39,7 +39,7 @@ end
 
 function Player:handleMovement(dt)
   if love.keyboard.isDown("d") then
-    self.position.x = math.min(SCREEN_WIDTH - self.width / 2, self.position.x + self.speed * dt)
+    self.position.x = math.min(data.SCREEN_WIDTH - self.width / 2, self.position.x + self.speed * dt)
   elseif love.keyboard.isDown("a") then
     self.position.x = math.max(self.width / 2, self.position.x - self.speed * dt)
   end
