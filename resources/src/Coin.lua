@@ -10,13 +10,13 @@ function Coin:new(x,y)
   local randomSpawnPosY = love.math.random(800, 900)
   self.delete = false
   
-  Coin.super.new(self,"resources/textures/coin.png",randomSpawnPosX, randomSpawnPosY, 50, 0 , -1)
+  Coin.super.new(self,"resources/textures/coin.png",randomSpawnPosX, randomSpawnPosY, 250, 0 , -1)
 end
 
 function Coin:update(dt)
     Coin.super.update(self,dt)
     --Check for borders
-    self:borderCollision()
+    self.delete = self:checkCollision()
     --Rotation
     self.rot = self.rot + rotationSpeed * dt
 end
@@ -32,10 +32,12 @@ function Coin:draw()
   love.graphics.draw(self.image,xx,yy,rr,sx,sy,ox,oy,0,0)
 end
 
-function Coin:borderCollision()
-  if self.position.y < 0 - self.height then
-    --store pos?
-    self.delete = true
+function Coin:checkCollision()
+  for _,v in ipairs(actorList) do
+    if self.position.y < 0 - self.height then
+      --store pos?
+      return true
+    end
   end
 end
 

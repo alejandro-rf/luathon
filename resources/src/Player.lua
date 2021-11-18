@@ -11,6 +11,7 @@ function Player:update(dt)
   --Player.handleInput(self, dt)
   --Player.super.update(self,dt)
   self:handleMovement(dt)
+  self:checkCollision()
 end
 
 function Player:draw()
@@ -41,6 +42,16 @@ function Player:handleMovement(dt)
     self.position.x = math.min(SCREEN_WIDTH - self.width / 2, self.position.x + self.speed * dt)
   elseif love.keyboard.isDown("a") then
     self.position.x = math.max(self.width / 2, self.position.x - self.speed * dt)
+  end
+end
+
+function Player:checkCollision()
+  for _,v in ipairs(actorList) do
+    if v:is(Coin)then
+      if self.position.x < v.position.x + v.width and self.position.x + self.width > v.position.x and self.position.y < v.position.y + v.height and self.height + self.position.y > v.position.y then
+        v.delete = true
+      end
+    end
   end
 end
 
