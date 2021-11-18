@@ -1,5 +1,8 @@
+local data = {}
 -- screen-related variables
-SCREEN_WIDTH, SCREEN_HEIGHT = love.graphics.getDimensions()
+data.SCREEN_WIDTH, data.SCREEN_HEIGHT = love.graphics.getDimensions()
 
 -- player-related variables
-PLAYER_TEXTURE = "resources/textures/playerShip1_blue.png"
+data.PLAYER_TEXTURE = "resources/textures/playerShip1_blue.png"
+
+return data
