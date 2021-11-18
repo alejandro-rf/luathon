@@ -1,7 +1,6 @@
 Actor = Actor or require "resources/lib/actor" --¿Como voy a un path anterior al que ya estoy?
 Player = Actor:extend()
 local Vector = Vector or require"resources/lib/vector"
-local Data = Data or require "data"
 
 function Player:new(x,y)
   Player.super.new(self,Data.PLAYER_TEXTURE,400,300,50,0,0)
