@@ -1,5 +1,20 @@
-var hola = 3
+Player = Player or require "resources/src/player"
 
-hello = "world"
+actorList = {}  --Lista de elementos de juego
 
-bye = "goodbye"
+function love.load()
+  local p = Player()
+  table.insert(actorList,p)
+end
+
+function love.update(dt)
+  for _,v in ipairs(actorList) do
+    v:update(dt)
+  end
+end
+
+function love.draw()
+  for _,v in ipairs(actorList) do
+    v:draw()
+  end
+end
