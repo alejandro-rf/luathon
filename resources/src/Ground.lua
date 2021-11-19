@@ -9,7 +9,7 @@ end
 
 function Ground:update(dt)
     Ground.super.update(self, dt)
-    self:behavior()
+    self:stopAtCertainPosition()
     self:checkCollision()
 end
 
@@ -24,7 +24,7 @@ function Ground:draw()
   love.graphics.draw(self.image,xx,yy,rr,sx,sy,ox,oy,0,0)
 end
 
-function Ground:behavior()
+function Ground:stopAtCertainPosition()
     if self.position.y <= Data.SCREEN_HEIGHT - self.height then
         self.speed = 0
     elseif playerIsDead and self.position.y > Data.SCREEN_HEIGHT + self.height/2 then
