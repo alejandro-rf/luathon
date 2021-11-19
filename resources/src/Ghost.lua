@@ -5,7 +5,7 @@ BadCoin = BadCoin or require "resources/src/badcoin"
 Anim8 = Anim8 or require "resources/lib/anim8"
 
 function Ghost:new(x,y)
-  Ghost.super.new(self,Data.PLAYER_GHOST_TEXTURE,400,300,300,0,0)
+  Ghost.super.new(self,Data.PLAYER_GHOST_TEXTURE,x,400,300,0,0)
   self.Dead = false
   self.quadWidth = 129
   self.quadHeight = 184

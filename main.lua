@@ -31,7 +31,7 @@ function love.load()
   d = PlayerDead()
   table.insert(actorList,p)
   table.insert(actorList, Timer(2, function() local coin = Coin(); table.insert(actorList, coin) end, true))
-  table.insert(actorList, Timer(10, function() local ground = Ground(); table.insert(actorList, ground) end, false))
+  table.insert(actorList, Timer(20, function() local ground = Ground(); table.insert(actorList, ground) end, false))
   ghostMode = 1
   play1 = 1
   timerExist = false
@@ -53,7 +53,7 @@ function love.update(dt)
       
       if ghostMode == 1 then
         
-        local ghost = Ghost()
+        local ghost = Ghost(d.position.x + 100)
         table.insert(actorList, ghost)
       end
       ghostMode = ghostMode + 1
