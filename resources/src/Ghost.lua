@@ -63,7 +63,7 @@ function Ghost:checkCollision(dt)
     if v:is(BadCoin) then
       if self.position.x < v.position.x + v.width and self.position.x + self.quadWidth > v.position.x and self.position.y < v.position.y + v.height and self.height + self.position.y > v.position.y then
         v.delete = true
-        playerScore = playerScore - 5
+        playerScore = playerScore - 10
         badCoinSound:play()
       end
     end

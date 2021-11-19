@@ -73,7 +73,7 @@ function love.draw()
   else
 
     background:draw()
-    love.graphics.print("Score: "..tostring(playerScore), Data.SCREEN_WIDTH - 500, 50)
+    love.graphics.print("Score: "..tostring(playerScore), Data.SCREEN_WIDTH - 470, 30)
     for _,v in ipairs(actorList) do
       v:draw()
         if v:is(Player) and v.Dead then
