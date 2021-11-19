@@ -14,6 +14,7 @@ actorList = {}  --Lista de elementos de juego
 
 function love.load()
 
+  love.graphics.setFont(love.graphics.newFont("resources/font/pong.ttf", 100))
   intro = intro.init("resources/vid/Intro.ogv")
 	intro.play()
 
@@ -72,6 +73,7 @@ function love.draw()
   else
 
     background:draw()
+    love.graphics.print("Score: "..tostring(0), Data.SCREEN_WIDTH - 500, 100)
     for _,v in ipairs(actorList) do
       v:draw()
         if v:is(Player) and v.Dead then
