@@ -11,7 +11,7 @@ function love.load()
   local g = Ground()
   table.insert(actorList,p)
   table.insert(actorList, Timer(2, function() local coin = Coin(); table.insert(actorList, coin) end, true))
-  table.insert(actorList, g)
+  table.insert(actorList, Timer(2, function() local ground = Ground(); table.insert(actorList, ground) end, false))
 end
 
 function love.update(dt)

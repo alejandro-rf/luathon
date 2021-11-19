@@ -4,13 +4,14 @@ local Vector = Vector or require"resources/lib/vector"
 
 function Player:new(x,y)
   Player.super.new(self,Data.PLAYER_TEXTURE,400,300,250,0,0)
+  self.Dead = false
 end
 
 function Player:update(dt)
   --Player.handleInput(self, dt)
   --Player.super.update(self,dt)
   self:handleMovement(dt)
-  self:checkCollision()
+  self:checkCollision(dt)
 end
 
 function Player:draw()
@@ -44,11 +45,16 @@ function Player:handleMovement(dt)
   end
 end
 
-function Player:checkCollision()
+function Player:checkCollision(dt)
   for _,v in ipairs(actorList) do
     if v:is(Coin)then
       if self.position.x < v.position.x + v.width and self.position.x + self.width > v.position.x and self.position.y < v.position.y + v.height and self.height + self.position.y > v.position.y then
         v.delete = true
+      end
+    end
+    if v:is(Ground) and not self.Dead then
+      self.position.y = self.position.y + self.speed * dt
+      if self.position.x < v.position.x + v.width and self.position.x + self.width > v.position.x and self.position.y < v.position.y + v.height and self.height + self.position.y > v.position.y then
       end
     end
   end
