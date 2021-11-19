@@ -28,7 +28,7 @@ end
 function Ground:stopAtCertainPosition()
     if self.position.y <= Data.SCREEN_HEIGHT - self.height then
         self.speed = 0
-    elseif playerIsDead and self.position.y > Data.SCREEN_HEIGHT + self.height/2 then
+    elseif playerIsDead and self.position.y > Data.SCREEN_HEIGHT + self.height then
       self.delete = true
     end
 end

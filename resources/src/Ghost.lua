@@ -1,11 +1,11 @@
 Actor = Actor or require "resources/lib/actor" --¿Como voy a un path anterior al que ya estoy?
-Player = Actor:extend()
+Ghost = Actor:extend()
 local Vector = Vector or require"resources/lib/vector"
 BadCoin = BadCoin or require "resources/src/badcoin"
 Anim8 = Anim8 or require "resources/lib/anim8"
 
-function Player:new(x,y)
-  Player.super.new(self,Data.PLAYER_TEXTURE,400,300,250,0,0)
+function Ghost:new(x,y)
+  Ghost.super.new(self,Data.PLAYER_GHOST_TEXTURE,400,300,250,0,0)
   self.Dead = false
   self.quadWidth = 129
   self.quadHeight = 184
@@ -14,18 +14,16 @@ function Player:new(x,y)
   self.grounded = false
 end
 
-function Player:update(dt)
-  --Player.handleInput(self, dt)
-  --Player.super.update(self,dt)
+function Ghost:update(dt)
+  --Ghost.handleInput(self, dt)
+  --Ghost.super.update(self,dt)
   
-  if not self.grounded then
-    self.animation:update(dt)
-    self:handleMovement(dt)
-  end
+  self.animation:update(dt)
+  self:handleMovement(dt)
   self:checkCollision(dt)
 end
 
-function Player:draw()
+function Ghost:draw()
   local xx = self.position.x
   --local ox = self.origin.x
   local yy = self.position.y
@@ -39,7 +37,7 @@ function Player:draw()
   end
 end
 
-function Player:handleInput(dt)
+function Ghost:handleInput(dt)
   --Go left
   if love.keyboard.isDown("a") then
     self.forward.x = -1
@@ -51,7 +49,7 @@ function Player:handleInput(dt)
   
 end
 
-function Player:handleMovement(dt)
+function Ghost:handleMovement(dt)
   if love.keyboard.isDown("d") then
     self.position.x = math.min(Data.SCREEN_WIDTH - self.width / 12, self.position.x + self.speed * dt)
   elseif love.keyboard.isDown("a") then
@@ -59,28 +57,14 @@ function Player:handleMovement(dt)
   end
 end
 
-function Player:checkCollision(dt)
+function Ghost:checkCollision(dt)
   for _,v in ipairs(actorList) do
     if v:is(Coin) or v:is(BadCoin) then
       if self.position.x < v.position.x + v.width and self.position.x + self.quadWidth > v.position.x and self.position.y < v.position.y + v.height and self.height + self.position.y > v.position.y then
         v.delete = true
       end
     end
-    if v:is(Ground) and not self.Dead then
-      self.position.y = self.position.y + self.speed * dt
-      if self.position.x < v.position.x + v.width and self.position.x + self.quadWidth > v.position.x and self.position.y < v.position.y + v.height and self.quadHeight + self.position.y > v.position.y then
-        self.animation:pause()
-      end
-    end
   end
 end
 
-function Player:Die()
-  self.Dead = true
-  self.grounded = true
-  table.insert(actorList, Timer(2, function() local coin = BadCoin(); table.insert(actorList, coin) end, true))
-  table.insert(actorList, Timer(24, function() love.event.quit() end, false))
-end
-
-
-return Player
+return Ghost
