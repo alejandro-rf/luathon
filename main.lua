@@ -20,7 +20,7 @@ function love.update(dt)
       table.remove(actorList, _)
     end
     v:update(dt)
-    print(#actorList)
+    --print(#actorList) --DEBUG: NUMBER OF ACTORS IN LIST
   end
 end
 
@@ -31,7 +31,7 @@ function love.draw()
 end
 
 function checkIfDead(object)
-  if object:is(Coin) and object.delete or object:is(Ground) and object.delete then
+  if object:is(Coin) and object.delete or object:is(Ground) and object.delete or object:is(Timer) and object.delete then
     return true
   end
 end
