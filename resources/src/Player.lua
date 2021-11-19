@@ -1,6 +1,7 @@
 Actor = Actor or require "resources/lib/actor" --¿Como voy a un path anterior al que ya estoy?
 Player = Actor:extend()
 local Vector = Vector or require"resources/lib/vector"
+BadCoin = BadCoin or require "resources/src/badcoin"
 
 function Player:new(x,y)
   Player.super.new(self,Data.PLAYER_TEXTURE,400,300,250,0,0)
@@ -47,7 +48,7 @@ end
 
 function Player:checkCollision(dt)
   for _,v in ipairs(actorList) do
-    if v:is(Coin)then
+    if v:is(Coin) or v:is(BadCoin) then
       if self.position.x < v.position.x + v.width and self.position.x + self.width > v.position.x and self.position.y < v.position.y + v.height and self.height + self.position.y > v.position.y then
         v.delete = true
       end
@@ -58,6 +59,12 @@ function Player:checkCollision(dt)
       end
     end
   end
+end
+
+function Player:Die()
+  self.Dead = true
+  table.insert(actorList, Timer(2, function() local coin = BadCoin(); table.insert(actorList, coin) end, true))
+  table.insert(actorList, Timer(24, function() love.event.quit() end, false))
 end
 
 

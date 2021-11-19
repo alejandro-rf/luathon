@@ -6,10 +6,10 @@ local rotationSpeed = 0.5
 function Coin:new(x,y)
   --Generate random spawn position
   local randomSpawnPosX = love.math.random(150, Data.SCREEN_WIDTH - 120)
-  local randomSpawnPosY = love.math.random(Data.SCREEN_HEIGHT, Data.SCREEN_HEIGHT + 100)
+  local randomSpawnPosY = love.math.random(-200, -250)
   self.delete = false
   
-  Coin.super.new(self, Data.COIN_TEXTURE,randomSpawnPosX, randomSpawnPosY, 250, 0 , -1)
+  Coin.super.new(self, Data.BAD_COIN_TEXTURE,randomSpawnPosX, randomSpawnPosY, 250, 0 , 1)
 end
 
 function Coin:update(dt)
@@ -32,7 +32,7 @@ function Coin:draw()
 end
 
 function Coin:checkCollision()
-    if self.position.y < 0 - self.height then
+    if self.position.y > Data.SCREEN_HEIGHT + self.height then
       --store pos?
       return true
     end

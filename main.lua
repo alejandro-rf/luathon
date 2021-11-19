@@ -1,5 +1,6 @@
 Player = Player or require "resources/src/player"
 Coin = Coin or require "resources/src/coin"
+BadCoin = BadCoin or require "resources/src/badcoin"
 Timer = Timer or require "resources/lib/timer"
 Ground = Ground or require "resources/src/Ground"
 Data = Data or require "data"
@@ -31,7 +32,7 @@ function love.draw()
 end
 
 function checkIfDead(object)
-  if object:is(Coin) and object.delete or object:is(Ground) and object.delete or object:is(Timer) and object.delete then
+  if object:is(Coin) and object.delete or object:is(BadCoin) and object.delete or object:is(Ground) and object.delete or object:is(Timer) and object.delete then
     return true
   end
 end
