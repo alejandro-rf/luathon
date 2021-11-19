@@ -45,7 +45,6 @@ function Ground:checkCollision(dt)
         end
         v:Die()
         playerIsDead = true
-        
         if not timer then
           table.insert(actorList, Timer(4, function() self.forward.y = 1; self.speed = 300 end, true))
           timer = true
