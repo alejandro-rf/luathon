@@ -12,6 +12,7 @@ function Player:new(x,y)
   self.grid = Anim8.newGrid(self.quadWidth, self.quadHeight, self.image:getWidth(), self.image:getHeight())
   self.animation = Anim8.newAnimation(self.grid("1-6", 1), 0.2)
   self.grounded = false
+  crackSound = love.audio.newSource("resources/sound/crackSound.wav", "stream")
 end
 
 function Player:update(dt)
@@ -70,6 +71,7 @@ function Player:checkCollision(dt)
       self.position.y = self.position.y + self.speed * dt
       if self.position.x < v.position.x + v.width and self.position.x + self.quadWidth > v.position.x and self.position.y < v.position.y + v.height and self.quadHeight + self.position.y > v.position.y then
         self.animation:pause()
+        self.crackSound:play()
       end
     end
   end
@@ -79,7 +81,7 @@ function Player:Die()
   self.Dead = true
   self.grounded = true
   table.insert(actorList, Timer(2, function() local coin = BadCoin(); table.insert(actorList, coin) end, true))
-  table.insert(actorList, Timer(24, function() love.event.quit() end, false))
+  table.insert(actorList, Timer(20, function() actorList = {}; musicUp:setVolume(0); musicFall:setVolume(0);intro2.play(); isPlaying = true end, false))
 end
 
 
