@@ -5,13 +5,14 @@ BadCoin = BadCoin or require "resources/src/badcoin"
 Anim8 = Anim8 or require "resources/lib/anim8"
 
 function Ghost:new(x,y)
-  Ghost.super.new(self,Data.PLAYER_GHOST_TEXTURE,400,300,250,0,0)
+  Ghost.super.new(self,Data.PLAYER_GHOST_TEXTURE,400,300,300,0,0)
   self.Dead = false
   self.quadWidth = 129
   self.quadHeight = 184
   self.grid = Anim8.newGrid(self.quadWidth, self.quadHeight, self.image:getWidth(), self.image:getHeight())
   self.animation = Anim8.newAnimation(self.grid("1-6", 1), 0.2)
   self.grounded = false
+  badCoinSound = love.audio.newSource("resources/sound/coinWrong.wav", "stream")
 end
 
 function Ghost:update(dt)
@@ -59,10 +60,11 @@ end
 
 function Ghost:checkCollision(dt)
   for _,v in ipairs(actorList) do
-    if v:is(Coin) or v:is(BadCoin) then
+    if v:is(BadCoin) then
       if self.position.x < v.position.x + v.width and self.position.x + self.quadWidth > v.position.x and self.position.y < v.position.y + v.height and self.height + self.position.y > v.position.y then
         v.delete = true
         playerScore = playerScore - 5
+        badCoinSound:play()
       end
     end
   end
