@@ -3,6 +3,7 @@ local Ground = Actor:extend()
 
 function Ground:new(x,y)
   local playerIsDead = false
+  local timer = false
   self.delete = false 
   Ground.super.new(self,"resources/textures/ground.png",Data.SCREEN_WIDTH / 2, Data.SCREEN_HEIGHT + 100, 700, 0 , -1)
 end
@@ -38,7 +39,10 @@ function Ground:checkCollision(dt)
       if self.position.y < v.position.y + v.height and self.height + self.position.y > v.position.y then
         v.Dead = true
         playerIsDead = true
-        table.insert(actorList, Timer(4, function() self.forward.y = 1; self.speed = 300 end, false))
+        if not timer then
+          table.insert(actorList, Timer(4, function() self.forward.y = 1; self.speed = 300 end, true))
+          timer = true
+        end
       end
     end
   end
