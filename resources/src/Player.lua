@@ -30,7 +30,12 @@ function Player:draw()
   --local sy = self.scale.y
   --local rr = self.rot
   --love.graphics.draw(self.image,xx,yy,rr,sx,sy,ox,oy,0,0)
-  self.animation:draw(self.image, xx, yy, 0, 1, 1, self.quadWidth / 2, self.quadHeight / 2)
+  if not self.Dead then
+    self.animation:draw(self.image, xx, yy, 0, 1, 1, self.quadWidth / 2, self.quadHeight / 2)
+  else
+    local deadImage = Data.PLAYER_DEAD_TEXTURE
+    love.graphics.draw(love.graphics.newImage(deadImage), xx, yy)
+  end
 end
 
 function Player:handleInput(dt)
@@ -62,9 +67,8 @@ function Player:checkCollision(dt)
     end
     if v:is(Ground) and not self.Dead then
       self.position.y = self.position.y + self.speed * dt
-      if self.position.x < v.position.x + v.width and self.position.x + self.quadWidth > v.position.x and self.position.y < v.position.y + v.height and self.height + self.position.y > v.position.y then
+      if self.position.x < v.position.x + v.width and self.position.x + self.quadWidth > v.position.x and self.position.y < v.position.y + v.height and self.quadHeight + self.position.y > v.position.y then
         self.animation:pause()
-        self.image = Data.PLAYER_DEAD_TEXTURE
       end
     end
   end
