@@ -6,14 +6,15 @@ Ground = Ground or require "resources/src/Ground"
 PlayerDead = PlayerDead or require "resources/src/PlayerDead"
 Ghost = Ghost or require "resources/src/Ghost"
 Data = Data or require "data"
-require "resources/src/background"
+Clouds = Clouds or require "resources/src/Background"
 
 actorList = {}  --Lista de elementos de juego
-clouds = Background()
+
 
 function love.load()
   local p = Player()
   local g = Ground()
+  background = Background()
   d = PlayerDead()
   table.insert(actorList,p)
   table.insert(actorList, Timer(2, function() local coin = Coin(); table.insert(actorList, coin) end, true))
@@ -23,7 +24,8 @@ end
 
 function love.update(dt)
   --BackgroundClouds(dt)
-  clouds:update(dt)
+  --Clouds:update(dt)
+  background:update(dt)
 
   for _,v in ipairs(actorList) do
     if checkIfDead(v) then
@@ -44,7 +46,7 @@ function love.update(dt)
 end
 
 function love.draw()
-  clouds:draw()
+  background:draw()
   for _,v in ipairs(actorList) do
     v:draw()
     if v:is(Player) and v.Dead then
