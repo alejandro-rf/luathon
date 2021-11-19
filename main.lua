@@ -33,6 +33,7 @@ function love.load()
   table.insert(actorList, Timer(4, function() local ground = Ground(); table.insert(actorList, ground) end, false))
   ghostMode = 1
   play1 = 1
+  timerExist = false
 end
 
 function love.update(dt)
@@ -74,12 +75,11 @@ function love.draw()
     for _,v in ipairs(actorList) do
       v:draw()
         if v:is(Player) and v.Dead then
-        d:draw()
-
-        if play1 == 1 then
-          crackSound:play()
-          play1 = 2
-        end
+          if play1 == 1 then
+            crackSound:play()
+            play1 = 2
+          end
+          d:draw()
 
         end
     end
@@ -87,12 +87,15 @@ function love.draw()
   love.graphics.setBackgroundColor( 0,0,0) --not very useful,just set the default color and the background color
 	love.graphics.setColor(255, 255, 255)
   
-  if isPlaying then
+  if isPlaying  then
     if intro2.video:isPlaying() then love.graphics.draw(intro2.video, intro2.x,intro2.y, 0, intro2.scale) 
+      if not timerExist then
+       table.insert(actorList, Timer(44, function() love.event.quit() end, false))
+       timerExist = true
+      end
+   end
+
     
-    else
-      love.even.quit()
-    end
 
   end
 
