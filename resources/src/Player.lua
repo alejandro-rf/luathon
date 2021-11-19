@@ -11,13 +11,16 @@ function Player:new(x,y)
   self.quadHeight = 184
   self.grid = Anim8.newGrid(self.quadWidth, self.quadHeight, self.image:getWidth(), self.image:getHeight())
   self.animation = Anim8.newAnimation(self.grid("1-6", 1), 0.2)
+  self.grounded = false
 end
 
 function Player:update(dt)
   --Player.handleInput(self, dt)
   --Player.super.update(self,dt)
   self.animation:update(dt)
-  self:handleMovement(dt)
+  if not self.grounded then
+    self:handleMovement(dt)
+  end
   self:checkCollision(dt)
 end
 
@@ -33,8 +36,8 @@ function Player:draw()
   if not self.Dead then
     self.animation:draw(self.image, xx, yy, 0, 1, 1, self.quadWidth / 2, self.quadHeight / 2)
   else
-    local deadImage = Data.PLAYER_DEAD_TEXTURE
-    love.graphics.draw(love.graphics.newImage(deadImage), xx, yy)
+    local deadImage = love.graphics.newImage(Data.PLAYER_DEAD_TEXTURE)
+    love.graphics.draw(deadImage, xx, yy)
   end
 end
 
@@ -76,6 +79,7 @@ end
 
 function Player:Die()
   self.Dead = true
+  self.grounded = true
   table.insert(actorList, Timer(2, function() local coin = BadCoin(); table.insert(actorList, coin) end, true))
   table.insert(actorList, Timer(24, function() love.event.quit() end, false))
 end
