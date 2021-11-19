@@ -62,6 +62,8 @@ function Player:checkCollision(dt)
     if v:is(Ground) and not self.Dead then
       self.position.y = self.position.y + self.speed * dt
       if self.position.x < v.position.x + v.width and self.position.x + self.quadWidth > v.position.x and self.position.y < v.position.y + v.height and self.height + self.position.y > v.position.y then
+        self.animation:pause()
+        self.image = Data.PLAYER_DEAD_TEXTURE
       end
     end
   end
