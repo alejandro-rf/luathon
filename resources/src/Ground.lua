@@ -6,6 +6,7 @@ function Ground:new(x,y)
   local timer = false
   self.delete = false 
   Ground.super.new(self,"resources/textures/ground.png",Data.SCREEN_WIDTH / 2, Data.SCREEN_HEIGHT + 100, 700, 0 , -1)
+  crackSound = love.audio.newSource("resources/sound/crackSound.wav", "stream")
 end
 
 function Ground:update(dt)
@@ -38,6 +39,8 @@ function Ground:checkCollision(dt)
     if v:is(Player) and v.Dead == false then
       if self.position.y < v.position.y + v.height and self.height + self.position.y > v.position.y then
         --Clean up
+        crackSound:play()
+
         for _,v in ipairs(actorList) do
           if v:is(Timer) then
             v.delete = true

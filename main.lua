@@ -75,10 +75,7 @@ function love.draw()
     for _,v in ipairs(actorList) do
       v:draw()
         if v:is(Player) and v.Dead then
-          if play1 == 1 then
-            crackSound:play()
-            play1 = 2
-          end
+          
           d:draw()
 
         end
