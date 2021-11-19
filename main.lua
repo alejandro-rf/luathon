@@ -11,10 +11,10 @@ Intro = Intro or require "resources/lib/intro"
 Intro2 = Intro2 or require "resources/lib/intro2"
 actorList = {}  --Lista de elementos de juego
 
-
 function love.load()
 
-  love.graphics.setFont(love.graphics.newFont("resources/font/pong.ttf", 100))
+  love.graphics.setFont(love.graphics.newFont("resources/font/pong.ttf", 80))
+  playerScore = 0
   intro = intro.init("resources/vid/Intro.ogv")
 	intro.play()
 
@@ -31,7 +31,7 @@ function love.load()
   d = PlayerDead()
   table.insert(actorList,p)
   table.insert(actorList, Timer(2, function() local coin = Coin(); table.insert(actorList, coin) end, true))
-  table.insert(actorList, Timer(4, function() local ground = Ground(); table.insert(actorList, ground) end, false))
+  table.insert(actorList, Timer(10, function() local ground = Ground(); table.insert(actorList, ground) end, false))
   ghostMode = 1
   play1 = 1
   timerExist = false
@@ -73,7 +73,7 @@ function love.draw()
   else
 
     background:draw()
-    love.graphics.print("Score: "..tostring(0), Data.SCREEN_WIDTH - 500, 100)
+    love.graphics.print("Score: "..tostring(playerScore), Data.SCREEN_WIDTH - 500, 50)
     for _,v in ipairs(actorList) do
       v:draw()
         if v:is(Player) and v.Dead then

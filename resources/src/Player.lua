@@ -65,6 +65,7 @@ function Player:checkCollision(dt)
     if v:is(Coin) or v:is(BadCoin) then
       if self.position.x < v.position.x + v.width and self.position.x + self.quadWidth > v.position.x and self.position.y < v.position.y + v.height and self.height + self.position.y > v.position.y then
         v.delete = true
+        playerScore = playerScore + 5
       end
     end
     if v:is(Ground) and not self.Dead then
@@ -80,7 +81,7 @@ end
 function Player:Die()
   self.Dead = true
   self.grounded = true
-  table.insert(actorList, Timer(2, function() local coin = BadCoin(); table.insert(actorList, coin) end, true))
+  table.insert(actorList, Timer(1, function() local coin = BadCoin(); table.insert(actorList, coin) end, true))
   table.insert(actorList, Timer(20, function() actorList = {};musicUp:setVolume(0); musicFall:setVolume(0);intro2.play(); isPlaying = true end, false))
 
   
