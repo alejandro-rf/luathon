@@ -35,10 +35,15 @@ end
 
 function Ground:checkCollision(dt)
   for _,v in ipairs(actorList) do
-    if v:is(Player)then
+    if v:is(Player) and v.Dead == false then
       if self.position.y < v.position.y + v.height and self.height + self.position.y > v.position.y then
         v.Dead = true
         playerIsDead = true
+        for _,v in ipairs(actorList) do
+          if v:is(Timer) then
+            v.delete = true
+          end
+        end
         if not timer then
           table.insert(actorList, Timer(4, function() self.forward.y = 1; self.speed = 300 end, true))
           timer = true

@@ -5,12 +5,11 @@ local rotationSpeed = 0.5
 
 function Coin:new(x,y)
   --Generate random spawn position
-  local randomImage = love.math.random(1, 4)
-  local randomSpawnPosX = love.math.random(150, 1280 - 120)
-  local randomSpawnPosY = love.math.random(800, 900)
+  local randomSpawnPosX = love.math.random(150, Data.SCREEN_WIDTH - 120)
+  local randomSpawnPosY = love.math.random(Data.SCREEN_HEIGHT, Data.SCREEN_HEIGHT + 100)
   self.delete = false
   
-  Coin.super.new(self,Data.COIN_TEXTURE,randomSpawnPosX, randomSpawnPosY, 250, 0 , -1)
+  Coin.super.new(self, Data.COIN_TEXTURE,randomSpawnPosX, randomSpawnPosY, 250, 0 , -1)
 end
 
 function Coin:update(dt)

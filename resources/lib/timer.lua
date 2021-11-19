@@ -7,6 +7,7 @@ function Timer:new(time,fun,r)
     self.tFin = time
     self.rep = r 
     self.position = Vector.new(-1,-1)
+    self.delete = false
 end
 
 function Timer:update(dt)
