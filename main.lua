@@ -11,7 +11,7 @@ function love.load()
   local g = Ground()
   table.insert(actorList,p)
   table.insert(actorList, Timer(2, function() local coin = Coin(); table.insert(actorList, coin) end, true))
-  table.insert(actorList, Timer(2, function() local ground = Ground(); table.insert(actorList, ground) end, false))
+  table.insert(actorList, Timer(20, function() local ground = Ground(); table.insert(actorList, ground) end, false))
 end
 
 function love.update(dt)
@@ -20,6 +20,7 @@ function love.update(dt)
       table.remove(actorList, _)
     end
     v:update(dt)
+    print(#actorList)
   end
 end
 
@@ -30,7 +31,7 @@ function love.draw()
 end
 
 function checkIfDead(object)
-  if object:is(Coin) and object.delete then
+  if object:is(Coin) and object.delete or object:is(Ground) and object.delete then
     return true
   end
 end
