@@ -55,7 +55,7 @@ end
 
 function Player:checkCollision(dt)
   for _,v in ipairs(actorList) do
-    if v:is(Coin)then
+    if v:is(Coin) or v:is(BadCoin) then
       if self.position.x < v.position.x + v.width and self.position.x + self.quadWidth > v.position.x and self.position.y < v.position.y + v.height and self.height + self.position.y > v.position.y then
         v.delete = true
       end
