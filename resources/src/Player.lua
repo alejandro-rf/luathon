@@ -81,7 +81,9 @@ function Player:Die()
   self.Dead = true
   self.grounded = true
   table.insert(actorList, Timer(2, function() local coin = BadCoin(); table.insert(actorList, coin) end, true))
-  table.insert(actorList, Timer(20, function() actorList = {}; musicUp:setVolume(0); musicFall:setVolume(0);intro2.play(); isPlaying = true end, false))
+  table.insert(actorList, Timer(20, function() actorList = {};musicUp:setVolume(0); musicFall:setVolume(0);intro2.play(); isPlaying = true end, false))
+
+  
 end
 
 
